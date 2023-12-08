@@ -1,0 +1,18 @@
+public class Solution {
+    public int solve(int[] A) {
+        int[] temp = new int[A.length];
+        temp[0] = A[0];
+        for(int i=1;i<A.length;i++){
+            temp[i] = temp[i-1]+A[i];
+        }
+        if(temp[A.length-1]==0){
+            return 0;
+        }
+        for(int i=1;i<A.length-2;i++){
+            if(temp[i-1]==temp[A.length-1]-temp[i]){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
