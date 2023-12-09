@@ -1,0 +1,25 @@
+public class Solution {
+    public int solve(int[] A, int B) {
+        int leastSum = Integer.MAX_VALUE;
+        int currentSum = 0;
+        int index = 0;
+        int N=A.length;
+        if(B<=N){
+            for(int i=0;i<B;i++){
+                currentSum += A[i];
+            }
+        }
+        if(currentSum<leastSum){
+            leastSum = currentSum;
+            index=0;
+        }
+        for(int i=1;i<=(N-B);i++){
+            currentSum = currentSum-A[i-1]+A[B+i-1];
+            if(currentSum<leastSum){
+                leastSum = currentSum;
+                index=i;
+            }
+        }
+        return index;
+    }
+}
