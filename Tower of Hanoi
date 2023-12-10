@@ -1,0 +1,25 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> towerOfHanoi(int A) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        hanoi(1,2,3,A,result);
+        return result;
+
+    }
+
+
+    private void hanoi(int a, int b, int c, int A, ArrayList<ArrayList<Integer>> result){
+
+        if(A==0){
+            return;
+        }
+
+
+        hanoi(a,c,b,A-1,result);
+        ArrayList<Integer> temp = new ArrayList<>();
+        temp.add(A);
+        temp.add(a);
+        temp.add(c);
+        result.add(temp);
+        hanoi(b,a,c,A-1,result);
+    }
+}
