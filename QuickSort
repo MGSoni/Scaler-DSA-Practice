@@ -1,0 +1,38 @@
+public class Solution {
+    public ArrayList<Integer> solve(ArrayList<Integer> A) {
+        quickSort(A,0,A.size()-1);
+        return A;
+    }
+
+    private int partition(ArrayList<Integer> A, int l,int r){
+
+
+        int pivot = r;
+        r--;
+
+        while(l<=r){
+            if(A.get(l)<=A.get(pivot)){
+                l++;
+            }else if(A.get(r)>A.get(pivot)){
+                r--;
+            }else{
+                Collections.swap(A,l,r);
+                l++;
+                r--;
+            }
+        }
+
+        Collections.swap(A,r+1,pivot);
+        return r+1;
+    }
+
+    private void quickSort(ArrayList<Integer> A, int l, int r){
+        if(l>=r){
+            return;
+        }
+
+        int pivot = partition(A,l,r);
+        quickSort(A,l,pivot-1);
+        quickSort(A,pivot+1,r);
+    }
+}
