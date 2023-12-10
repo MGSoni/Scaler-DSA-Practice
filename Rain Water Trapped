@@ -1,0 +1,36 @@
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public int trap(final int[] A) {
+
+        int[] left = new int[A.length];
+        int[] right = new int[A.length];
+
+        int leftMax = A[0];
+        left[0]=A[0];
+        for(int i=1;i<A.length-1;i++){
+            if(A[i]>leftMax){
+                leftMax=A[i];
+            }
+            left[i]=leftMax;
+        }
+
+        int rightMax=A[A.length-1];
+        right[A.length-1]=A[A.length-1];
+
+        for(int j=A.length-2;j>=0;j--){
+            if(A[j]>rightMax){
+                rightMax=A[j];
+            }
+            right[j]=rightMax;
+        }
+        int waterStored=0;
+        for(int i=1;i<A.length-1;i++){
+            int x = Math.min(left[i],right[i])-A[i];
+            if(x>0){
+                waterStored+=x;
+            }
+        }
+        return waterStored;
+
+    }
+}
