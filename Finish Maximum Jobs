@@ -1,0 +1,36 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A, ArrayList<Integer> B) {
+        ArrayList<Activity> activityList = new ArrayList<>();
+
+        for(int i=0;i<A.size();i++){
+            activityList.add(new Activity(A.get(i),B.get(i)));
+        }
+
+        Collections.sort(activityList, new Comparator<Activity>(){
+            public int compare(Activity A, Activity B){
+                return A.end-B.end;
+            }
+        });
+
+        int endTime = -1;
+        int count=0;
+        for(int i=0;i<activityList.size();i++){
+
+            if(activityList.get(i).start>=endTime){
+                count++;
+                endTime=activityList.get(i).end;
+            }
+        }
+        return count;
+    }
+
+    private class Activity{
+        int start;
+        int end;
+
+        Activity(int start, int end){
+            this.start=start;
+            this.end=end;
+        }
+    }
+}
