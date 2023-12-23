@@ -1,0 +1,66 @@
+public class Solution {
+    int mod = 1000000007;
+    public int solve(int[] A) {
+
+        return inversionCount(A,0,A.length-1);
+
+    }
+
+    private int inversionCount(int[] A,int left,int right){
+
+        if(left==right){
+            return 0;
+        }
+
+        int mid = left+(right-left)/2;
+
+        int leftCount = inversionCount(A,left,mid);
+        leftCount%=mod; 
+        int rightCount = inversionCount(A,mid+1,right);
+        rightCount%=mod;
+        int mergeCount = merge(A,left,mid,right);
+        mergeCount%=mod;
+
+        return (leftCount+rightCount+mergeCount)%mod;
+    }
+
+    private int merge(int[] A,int left,int mid, int right){
+        int i=left;
+        int j=mid+1;
+        int count=0;
+        int length = right-left+1;
+        int[] temp = new int[length];
+        int index=0;
+        while(i<=mid && j<=right){
+            if(A[i]<=A[j]){
+                temp[index]=A[i];
+                i++;
+                index++;
+            }else{
+                count+= mid-i+1;
+                count%=mod;
+                temp[index]=A[j];
+                index++;
+                j++;
+            }
+        }
+
+        while(i<=mid){
+            temp[index]=A[i];
+            i++;
+            index++;
+        }
+        while(j<=right){
+            temp[index]=A[j];
+            j++;
+            index++;
+        }
+        index=0;
+        for(i=left;i<=right;i++){
+            A[i]=temp[index];
+            index++;
+        }
+
+        return count;
+    }
+}
