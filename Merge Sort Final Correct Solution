@@ -1,0 +1,53 @@
+public class Solution {
+	public static void mergeSort(int[] arr, int n) {
+		// Write your code here.
+		divide(arr,0,n-1);
+	}
+
+	public static void divide(int[] arr, int l, int r){
+		if(l>=r)
+			return;
+
+		int mid = (l+r)/2;
+
+		divide(arr,l,mid);
+		divide(arr,mid+1,r);
+		merge(arr,l,mid,r);
+	}
+
+	public static void merge(int[] A,int l, int mid, int r){
+		int left=l;
+		int right=mid+1;
+
+		int temp[] = new int[r-l+1];
+		int i=0;
+		while(left<=mid && right<=r){
+			if(A[left]<=A[right]){
+				temp[i]=A[left];
+				i++;
+				left++;
+			}else{
+				temp[i]=A[right];
+				i++;
+				right++;
+			}
+		}
+
+		while(left<=mid){
+			temp[i]=A[left];
+			i++;
+			left++;
+		}
+
+		while(right<=r){
+			temp[i]=A[right];
+			i++;
+			right++;
+		}
+		i=0;
+		for(int j=l;j<=r;j++){
+			A[j]=temp[i];
+			i++;
+		}
+	}
+}
